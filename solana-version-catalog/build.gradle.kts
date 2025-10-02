@@ -1,3 +1,5 @@
+import org.jfrog.gradle.plugin.artifactory.dsl.ArtifactoryPluginConvention
+
 // This setup publishes the defined versions as BOM (platform) and Version Catalog
 // It follows the approach of https://repo1.maven.org/maven2/io/micronaut/platform/micronaut-platform
 
@@ -5,6 +7,7 @@ plugins {
   id("java-platform")
   id("version-catalog")
   id("software.sava.build.feature.publish")
+  id("com.jfrog.artifactory") version "6.0.1"
 }
 
 group = "software.sava"
@@ -169,5 +172,19 @@ catalog {
     // Versions
     version("grpc", grpc)
     version("protoc", googleProtobuf)
+  }
+}
+
+configure<ArtifactoryPluginConvention> {
+  publish {
+    contextUrl = "https://software.r3.com/artifactory"
+    repository {
+      repoKey = "corda-dependencies"
+      username = System.getenv("CORDA_ARTIFACTORY_USERNAME")
+      password = System.getenv("CORDA_ARTIFACTORY_PASSWORD")
+    }
+    defaults {
+      publications("ALL_PUBLICATIONS")
+    }
   }
 }
