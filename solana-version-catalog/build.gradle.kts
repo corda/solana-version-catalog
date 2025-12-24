@@ -16,7 +16,7 @@ version = providers.gradleProperty("version").getOrElse("")
 // Plugins
 
 // https://github.com/beryx/badass-jlink-plugin
-val jlink = "3.1.2"
+val jlink = "3.1.3"
 
 // https://plugins.gradle.org/plugin/com.google.protobuf
 val googleProtobufPlugin = "0.9.5"
@@ -26,7 +26,7 @@ val googleProtobufPlugin = "0.9.5"
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
-val junit = "5.13.4"
+val junit = "6.0.1"
 
 // Compile & Implementation
 
@@ -38,36 +38,52 @@ val savaJsonIterator = "21.0.11-j17-1"
 val bouncyCastle = "1.81"
 
 // https://central.sonatype.com/search?namespace=software.sava
-val sava = "24.21.3"
-val savaWeb2 = "24.0.3"
-val savaPrograms = "24.20.3"
-val savaSrcGen = "24.0.9"
-val savaAnchorPrograms = "24.1.9"
+val sava = "25.0.2"
+val savaWeb2 = "25.0.0"
+val savaPrograms = "25.0.0"
+val savaAnchorPrograms = "25.1.4"
 
-val glamIxProxy = "24.0.0"
+val savaIDLClients = "25.7.0"
+val savaIDLClientsCore = savaIDLClients
+val savaIDLClientsCCTP = savaIDLClients
+val savaIDLClientsDrift = savaIDLClients
+val savaIDLClientsJupiter = savaIDLClients
+val savaIDLClientsKamino = savaIDLClients
+val savaIDLClientsMarinade = savaIDLClients
+val savaIDLClientsMetaplex = savaIDLClients
+val savaIDLClientsMeteora = savaIDLClients
+val savaIDLClientsOracles = savaIDLClients
+val savaIDLClientsSPL = savaIDLClients
+
+val glamIxProxy = "25.0.2"
+val glamSDK = "25.2.3"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
-val jetty = "12.1.0"
+val jetty = "12.1.5"
+// https://mvnrepository.com/artifact/io.fusionauth/java-http
+val fusionauthHttp = "1.4.0"
+
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
-val googleCloudKms = "2.75.0"
-val savaRavina = "24.0.2"
+val googleCloudKms = "2.83.0"
+val savaRavina = "25.1.1"
 
 // https://mvnrepository.com/artifact/io.grpc
-val grpc = "1.75.0"
+val grpc = "1.76.0"
 // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
 // https://mvnrepository.com/artifact/com.google.protobuf/protoc
 // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
-val googleProtobuf = "4.31.1"
+val googleProtobuf = "4.32.0"
+
+dependencies {
+}
 
 dependencies.constraints {
   // Tests
-
-  api("org.junit.jupiter:junit-jupiter:$junit")
-  api("org.junit.jupiter:junit-jupiter-api:$junit")
-  api("org.junit.jupiter:junit-jupiter-params:$junit")
+  api("org.junit.jupiter:junit-jupiter:${junit}")
+  api("org.junit.jupiter:junit-jupiter-api:${junit}")
+  api("org.junit.jupiter:junit-jupiter-params:${junit}")
 
   // Compile & Implementation
-
   api("software.sava:json-iterator:$savaJsonIterator")
 
   api("org.bouncycastle:bcprov-jdk18on:$bouncyCastle")
@@ -75,12 +91,22 @@ dependencies.constraints {
   api("software.sava:sava-core:$sava")
   api("software.sava:sava-rpc:$sava")
 
+  api("software.sava:solana-web2:${savaWeb2}")
+
   api("software.sava:solana-programs:$savaPrograms")
 
-  api("software.sava:anchor-src-gen:$savaSrcGen")
   api("software.sava:anchor-programs:$savaAnchorPrograms")
 
-  api("software.sava:solana-web2:$savaWeb2")
+  api("software.sava:idl-clients-core:${savaIDLClientsCore}")
+  api("software.sava:idl-clients-cctp:$savaIDLClientsCCTP")
+  api("software.sava:idl-clients-drift:$savaIDLClientsDrift")
+  api("software.sava:idl-clients-jupiter:$savaIDLClientsJupiter")
+  api("software.sava:idl-clients-kamino:$savaIDLClientsKamino")
+  api("software.sava:idl-clients-marinade:${savaIDLClientsMarinade}")
+  api("software.sava:idl-clients-metaplex:${savaIDLClientsMetaplex}")
+  api("software.sava:idl-clients-meteora:${savaIDLClientsMeteora}")
+  api("software.sava:idl-clients-oracles:$savaIDLClientsOracles")
+  api("software.sava:idl-clients-spl:$savaIDLClientsSPL")
 
   api("software.sava:ravina-jetty:$savaRavina")
   api("software.sava:ravina-core:$savaRavina")
@@ -92,6 +118,7 @@ dependencies.constraints {
   api("software.sava:ravina-kms-google:$savaRavina")
 
   api("systems.glam:ix-proxy:$glamIxProxy")
+  api("systems.glam:sdk:${glamSDK}")
 
   // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
   api("org.eclipse.jetty:jetty-server:$jetty")
@@ -104,6 +131,13 @@ dependencies.constraints {
   api("org.eclipse.jetty:jetty-alpn-conscrypt-server:$jetty")
   // https://mvnrepository.com/artifact/org.eclipse.jetty.http3/jetty-http3-server
   api("org.eclipse.jetty.http3:jetty-http3-server:$jetty")
+  // https://mvnrepository.com/artifact/org.eclipse.jetty.compression/jetty-compression-server
+  api("org.eclipse.jetty.compression:jetty-compression-server:${jetty}")
+  api("org.eclipse.jetty.compression:jetty-compression-gzip:${jetty}")
+  api("org.eclipse.jetty.compression:jetty-compression-brotli:${jetty}")
+  api("org.eclipse.jetty.compression:jetty-compression-zstandard:${jetty}")
+
+  api("io.fusionauth:java-http:$fusionauthHttp")
 
   // https://mvnrepository.com/artifact/io.grpc/grpc-netty-shaded
   api("io.grpc:grpc-netty-shaded:$grpc")
@@ -122,6 +156,7 @@ catalog {
   // The cases where the alias should differ are defined below.
   configureExplicitAlias("bouncycastle", "org.bouncycastle", "bcprov-jdk18on")
   configureExplicitAlias("glam-ix-proxy", "systems.glam", "ix-proxy")
+  configureExplicitAlias("glam-sdk", "systems.glam", "sdk")
   configureExplicitAlias("protoc-gen-grpc", "io.grpc", "protoc-gen-grpc-java")
   configurations.api.get().dependencyConstraints.forEach { constraint ->
     if (constraint.group == "software.sava" && !constraint.name.startsWith("sava")) {
@@ -143,10 +178,19 @@ catalog {
         "sava-core",
         "sava-rpc",
         "sava-solana-programs",
-        "sava-anchor-src-gen",
-        "sava-anchor-programs"
+        "sava-anchor-programs",
+        "sava-idl-clients-core",
+        "sava-idl-clients-drift",
+        "sava-idl-clients-jupiter",
+        "sava-idl-clients-kamino",
+//        "sava-idl-clients-marinade",
+//        "sava-idl-clients-metaplex",
+//        "sava-idl-clients-meteora",
+        "sava-idl-clients-oracles"
       )
     )
+
+    bundle("glam", listOf("glam-ix-proxy", "glam-sdk"))
 
     bundle(
       "jetty", listOf(
@@ -155,7 +199,9 @@ catalog {
         "jetty-alpn-server",
         "jetty-alpn-java-server",
         "jetty-alpn-conscrypt-server",
-        "jetty-http3-server"
+        "jetty-http3-server",
+        "jetty-compression-server",
+        "jetty-compression-gzip"
       )
     )
 
