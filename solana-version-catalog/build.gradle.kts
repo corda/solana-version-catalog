@@ -31,19 +31,19 @@ val junit = "6.0.3"
 // Compile & Implementation
 
 // https://github.com/sava-software/json-iterator
-val savaJsonIterator = "21.0.11-j17-1"
+val savaJsonIterator = "21.0.12"
 
 // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
 // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
 val bouncyCastle = "1.83"
 
 // https://central.sonatype.com/search?namespace=software.sava
-val sava = "25.1.2-j17-2"
+val sava = "25.3.1-j17-1"
 val savaWeb2 = "25.1.0"
 val savaPrograms = "25.0.0"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.10.11"
+val savaIDLClients = "25.10.12"
 val savaIDLClientsCore = savaIDLClients
 val savaIDLClientsCCTP = savaIDLClients
 val savaIDLClientsDrift = savaIDLClients
@@ -56,7 +56,7 @@ val savaIDLClientsOracles = savaIDLClients
 val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.2"
-val glamSDK = "25.5.1"
+val glamSDK = "25.7.0"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
 val postgresql = "42.7.10"
@@ -71,6 +71,7 @@ val fusionauthHttp = "1.4.0"
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.89.0"
 val savaRavina = "25.1.1"
+val savaIncidentClients = "25.1.1"
 
 // https://mvnrepository.com/artifact/io.grpc
 val grpc = "1.76.0"
@@ -124,6 +125,10 @@ dependencies.constraints {
 
   api("com.google.cloud:google-cloud-kms:$googleCloudKms")
   api("software.sava:ravina-kms-google:$savaRavina")
+
+  api("software.sava:incident-core:${savaIncidentClients}")
+  // api("software.sava:incident-io:${savaIncidentClients}")
+  api("software.sava:incident-pagerduty:${savaIncidentClients}")
 
   api("systems.glam:ix-proxy:$glamIxProxy")
   api("systems.glam:sdk:${glamSDK}")
